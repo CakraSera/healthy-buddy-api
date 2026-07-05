@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: healthbuddy
+    environment:
+      POSTGRES_USER: healthbuddy
+      POSTGRES_PASSWORD: healthbuddy
+      POSTGRES_DB: healthbuddy
+    ports:
+      - "65432:5432"
+    volumes:
+      - healthbuddy:/var/lib/postgresql/data
+
+volumes:
+  healthbuddy:
