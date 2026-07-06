@@ -4,7 +4,8 @@ import { cors } from "hono/cors";
 
 import { OpenAPIHono } from "@hono/zod-openapi";
 import { Scalar } from "@scalar/hono-api-reference";
-import { chatRoute } from "./modules/chat/routes";
+import { chatRoute } from "./modules/chat/route";
+import { summaryRoute } from "./modules/summary/route";
 
 const app = new OpenAPIHono();
 app.use("*", logger());
@@ -12,6 +13,7 @@ app.use("*", cors());
 
 // List Routes
 app.route("/chat", chatRoute);
+app.route("/summary", summaryRoute);
 
 // Use the middleware to serve the API Reference at /scalar
 app.doc("/openapi.json", {
