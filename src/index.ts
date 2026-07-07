@@ -22,9 +22,19 @@ app.doc("/openapi.json", {
     title: "HealthyBuddy AI API",
     version: "1.0.0",
   },
+  tags: [
+    { name: "Chat", description: "Talk to the AI health coach" },
+    { name: "Summary", description: "Weekly health summary generation" },
+  ],
 });
 
-app.get("/", Scalar({ url: "/openapi.json" }));
+app.get(
+  "/",
+  Scalar({
+    url: "/openapi.json",
+    hideModels: true,
+  }),
+);
 
 serve(
   {

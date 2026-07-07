@@ -4,19 +4,18 @@ import { getResponseAIChat } from "./service";
 
 export const chatRoute = new OpenAPIHono();
 
+// POST / - Send a message to the AI health coach
 chatRoute.openapi(
   createRoute({
     method: "post",
     path: "/",
     tags: ["Chat"],
-    summary: "Send a message to the heatlh coach",
-    description: "Streams the coach reply as text",
     request: {
       body: { content: { "application/json": { schema: ChatRequestSchema } } },
     },
     responses: {
       200: {
-        description: "Streamed coach reply",
+        description: "Coach reply",
       },
     },
   }),

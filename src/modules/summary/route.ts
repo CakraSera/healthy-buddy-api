@@ -8,12 +8,12 @@ import { createPendingSummary, getSummary } from "./service";
 import { summaryQueue } from "../../utils/queue";
 export const summaryRoute = new OpenAPIHono();
 
+// POST /summary - Request a weekly health summary (runs in background)
 summaryRoute.openapi(
   createRoute({
     method: "post",
-    path: "/summary",
-    tags: ["summary"],
-    summary: "request a weekly health summary (runs in background)",
+    path: "/",
+    tags: ["Summary"],
     request: {
       body: {
         content: { "application/json": { schema: SummaryRequestSchema } },
@@ -22,7 +22,7 @@ summaryRoute.openapi(
     responses: {
       202: {
         content: { "application/json": { schema: SummaryAcceptedSchema } },
-        description: "job accepted and queued",
+        description: "Job accepted and queued",
       },
     },
   }),
@@ -43,12 +43,12 @@ summaryRoute.openapi(
   },
 );
 
+// GET /summary/{id} - Get the status of a summary request
 summaryRoute.openapi(
   createRoute({
     method: "get",
-    path: "/summary/{id}",
+    path: "/{id}",
     tags: ["Summary"],
-    summary: "get the status of a summary request",
     request: {
       params: SummaryResultSchema.pick({ id: true }),
     },
